@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>스프링부트 웹서비스</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .clickable-row { cursor: pointer; }
+        .clickable-row:hover { background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <a class="navbar-brand" href="/main">My Service</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {{#isMain}}active{{/isMain}}">
+                <a class="nav-link" href="/main">홈</a>
+            </li>
+            <li class="nav-item {{#isBoard}}active{{/isBoard}}">
+                <a class="nav-link" href="/board">게시판</a>
+            </li>
+            <li class="nav-item {{#isGraph}}active{{/isGraph}}">
+                <a class="nav-link" href="/graph">경제 지표</a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+                {{#userName}}
+                    {{userName}}님
+                    <a href="/logout" class="btn btn-outline-light btn-sm ml-3">Logout</a>
+                {{/userName}}
+            {{^userName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success btn-sm ml-3">Login</a>
+            {{/userName}}
+            </span>
+    </div>
+</nav>

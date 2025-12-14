@@ -1,0 +1,46 @@
+{{>layout/header}}
+
+<div class="container mt-5">
+    <h1>자유 게시판</h1>
+    <br>
+
+    <div class="card mb-4">
+        <div class="card-header">새 글 작성</div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+                </div>
+            </form>
+            <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+        </div>
+    </div>
+
+    <table class="table table-horizontal table-bordered table-hover">
+        <thead class="thead-strong bg-light">
+        <tr>
+            <th style="width: 10%">번호</th>
+            <th>제목</th>
+            <th style="width: 20%">작성자</th>
+            <th style="width: 20%">작성일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr class="clickable-row" onclick="location.href='/posts/view/{{id}}'">
+                <td>{{id}}</td>
+                <td>{{title}}</td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+</div>
+
+{{>layout/footer}}

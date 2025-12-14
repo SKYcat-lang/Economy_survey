@@ -1,0 +1,38 @@
+{{>layout/header}}
+
+<div class="container mt-5">
+    <h1>{{post.title}}</h1>
+    <p class="text-right">작성자: {{post.author}} | 수정일: {{post.modifiedDate}}</p>
+    <hr>
+
+    <div class="mb-5">
+        {{post.content}}
+    </div>
+
+    <div class="text-center mb-5">
+        <button type="button" class="btn {{#post.isLiked}}btn-danger{{/post.isLiked}}{{^post.isLiked}}btn-outline-danger{{/post.isLiked}}" id="btn-like">
+            ♥ 좋아요 <span id="like-count">{{post.likesCount}}</span>
+        </button>
+        <a href="/posts/update/{{post.id}}" class="btn btn-secondary">수정하기</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header">댓글</div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {{#post.comments}}
+                    {{>comments/list}}
+                {{/post.comments}}
+            </ul>
+        </div>
+        <div class="card-footer">
+            <div class="form-group">
+                <input type="hidden" id="postsId" value="{{post.id}}">
+                <textarea class="form-control" id="comment-content" rows="3" placeholder="댓글을 입력하세요"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-comment-save">댓글 등록</button>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

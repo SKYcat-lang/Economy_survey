@@ -1,0 +1,129 @@
+{{>layout/header}}
+
+<style>
+    /* 국가별 설명 카드 스타일 */
+    .country-card {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-left-width: 5px !important; /* 왼쪽 굵은 선 */
+        border-radius: 0.5rem;
+        transition: transform 0.2s;
+    }
+    .country-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+
+    /* 국가별 테마 색상 매핑 */
+    .border-us { border-left-color: #0984e3 !important; } /* 미국 - 파랑 */
+    .border-cn { border-left-color: #d63031 !important; } /* 중국 - 빨강 */
+    .border-de { border-left-color: #00b894 !important; } /* 독일 - 초록 */
+    .border-kr { border-left-color: #6c5ce7 !important; } /* 한국 - 보라 */
+
+    /* 텍스트 하이라이트 */
+    .highlight-bg {
+        background-color: #fff3cd;
+        padding: 0 4px;
+        border-radius: 2px;
+        font-weight: 600;
+    }
+    .danger-text {
+        color: #c0392b;
+        font-weight: 800;
+    }
+</style>
+
+<div class="container mt-5">
+
+    <div class="card mb-5 shadow-sm">
+        <div class="card-header bg-white font-weight-bold py-3">
+            <h5 class="m-0">📊 국가별 경제 위상 공간 (2005-2024)</h5>
+        </div>
+        <div class="card-body">
+            <canvas id="phaseSpaceChart" style="width: 100%; height: 500px;"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+            <div class="mb-5">
+                <h2 class="font-weight-bold mb-3">왜 이런 그래프를 만들었나요?</h2>
+                <p class="lead text-muted">
+                    우리는 흔히 "선진국은 다 비슷하게 잘 산다"고 생각합니다. 하지만 이 그래프가 보여주는 진실은 전혀 다릅니다. 이 <strong>'위상 공간(Phase Space)'</strong> 지도는 지난 20년간(2005-2024) 세계 주요 국가들이 <strong>돈(금융)</strong>과 <strong>공장(생산)</strong> 사이에서 어떤 선택을 했는지를 적나라하게 보여줍니다.
+                </p>
+            </div>
+
+            <div class="card bg-light border-0 mb-5">
+                <div class="card-body">
+                    <h6 class="font-weight-bold mb-3">📌 그래프 읽는 법</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <span class="badge badge-primary mr-2" style="width: 60px;">X축</span>
+                            <strong>금융자본화 비율:</strong> 오른쪽으로 갈수록 경제가 은행과 신용에 깊이 의존합니다.
+                        </li>
+                        <li class="mb-2">
+                            <span class="badge badge-success mr-2" style="width: 60px;">Y축</span>
+                            <strong>미래를 위한 투자:</strong> 위로 갈수록 돈을 주식놀음이 아니라 공장과 설비를 짓는 데 씁니다.
+                        </li>
+                        <li>
+                            <span class="badge badge-danger mr-2" style="width: 60px;">Color</span>
+                            <strong>가계부채 위험도:</strong> <span class="text-primary font-weight-bold">파란색</span>은 건전하지만, <span class="text-danger font-weight-bold">빨간색</span>으로 변할수록 평범한 사람들의 빚으로 경제를 떠받치고 있다는 경고입니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card country-card border-us p-4 h-100">
+                        <h5 class="font-weight-bold" style="color: #0984e3;">🇺🇸 미국: 공장을 짓지 않는 금융 제국</h5>
+                        <p class="card-text mt-3">
+                            미국의 위치를 보십시오. 오른쪽 끝에 가 있지만, 바닥을 기고 있습니다. 미국은 세계 최고의 금융 시스템을 가졌지만, 그 돈이 <span class="highlight-bg">생산적인 일(설비 투자)로는 거의 흘러가지 않는다</span>는 충격적인 사실입니다. 돈이 돈을 버는 금융공학은 발달했어도, 정작 물건을 만들고 기술을 혁신하는 물리적 토대는 약해졌습니다. <strong>"금융은 비대해졌으나 생산은 멈춘 거인"</strong>, 이것이 오늘날 미국의 자화상입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="card country-card border-cn p-4 h-100">
+                        <h5 class="font-weight-bold" style="color: #d63031;">🇨🇳 중국: 두려운 생산의 엔진</h5>
+                        <p class="card-text mt-3">
+                            반면 중국을 보십시오. 그래프의 꼭대기를 차지하고 있습니다. 중국의 궤적은 경이로움을 넘어 두려움을 자아냅니다. 그들은 금융 시스템에서 뿜어져 나오는 자본을 무서운 속도로 공장과 인프라(Capex)에 쏟아붓고 있습니다. 미국이 주가를 부양할 때 <strong>중국은 댐을 짓고 로봇을 설치했다</strong>는 뜻입니다. 이 압도적인 투자가 세계의 균형을 어떻게 흔들지, 우리는 계속 지켜봐야 합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="card country-card border-de p-4 h-100">
+                        <h5 class="font-weight-bold" style="color: #00b894;">🇩🇪 독일: 안정을 택한 보수주의</h5>
+                        <p class="card-text mt-3">
+                            독일의 위치는 의외로 소박합니다. 금융화(X축)가 생각보다 낮습니다. 이는 독일 사회민주당(SPD)과 노동조합이 오랫동안 지켜온 '라인강 자본주의'의 특성 때문일지도 모릅니다. 그들은 영미식의 급진적인 금융 팽창보다는, <strong>제조업 기반의 '안정'</strong>을 택했습니다. 화려한 금융 성장은 없었지만, 탄탄한 제조업이 버티고 있는 이유이기도 합니다. 진보라기보다는 '현상 유지'에 가까운 이 묵직함이 독일 경제의 특징입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="card country-card border-kr p-4 h-100">
+                        <h5 class="font-weight-bold" style="color: #6c5ce7;">🇰🇷 한국: 붉게 물든 빚더미 위의 질주</h5>
+                        <p class="card-text mt-3">
+                            가장 눈여겨봐야 할 곳은 바로 우리, 한국입니다. 한국은 높은 투자를 유지하면서도, 상당히 금융화된 평범한 나라로 보여집니다. 하지만 <strong>선의 색깔</strong>을 보십시오. <span class="danger-text">새빨갛게 불타오르고 있습니다.</span> 한국의 성장은 기업의 투자 의지만으로 이루어진 것이 아닙니다. 세계 최고 수준으로 치솟은 '가계부채'가 그 뒤를 위태롭게 받치고 있습니다. 우리는 미래를 위해 투자를 아끼지 않았지만, 그 대가로 가계부를 붉게 물들였습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-dark mt-4 p-4" role="alert">
+                <h5 class="alert-heading font-weight-bold">💡 결론적으로...</h5>
+                <p class="mb-0">
+                    이 그래프는 우리에게 묻고 있습니다. 생산적 투자 없이 금융만 비대해진 미국이 옳은가? 아니면 빚을 내서라도 생산력을 유지하려는 한국이 옳은가? 정답은 없습니다. 다만 확실한 것은, <strong>'금융이 누구를 위해 복무하는가'</strong>에 따라 국가의 운명은 완전히 다른 궤적을 그린다는 사실입니다.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/app/graph.js"></script>
+
+{{>layout/footer}}

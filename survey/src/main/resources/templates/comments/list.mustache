@@ -1,0 +1,21 @@
+<li class="list-group-item" style="border: none;">
+    <div class="d-flex w-100 justify-content-between">
+        <small class="text-muted">{{author}}</small>
+        <small class="text-muted">{{modifiedDate}}</small>
+    </div>
+    <p class="mb-1">{{content}}</p>
+
+    <button class="btn btn-sm btn-light btn-reply-toggle" data-id="{{id}}">답글 달기</button>
+
+    <div class="reply-form d-none mt-2" id="reply-form-{{id}}">
+        <textarea class="form-control" id="reply-content-{{id}}" rows="2"></textarea>
+        <button class="btn btn-sm btn-primary mt-1 btn-reply-save" data-id="{{id}}">등록</button>
+    </div>
+
+    {{#children}}
+        <div style="margin-left: 20px; border-left: 2px solid #eee; padding-left: 10px;">
+            <ul class="list-group list-group-flush">
+                {{>comments/list}} </ul>
+        </div>
+    {{/children}}
+</li>
