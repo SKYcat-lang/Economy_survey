@@ -1,5 +1,5 @@
-survey/src/main/resources/application-oauth.properties
-/DB/
+/survey/src/main/resources/application-oauth.properties
+/survey/DB/
 HELP.md
 .gradle
 build/
