@@ -46,7 +46,7 @@
 
 ## 📂 프로젝트 구조
 
-\`\`\`
+```
 .
 ├── backserver.py          # Python 데이터 분석 서버 (FastAPI)
 ├── survey/                # Spring Boot 웹 애플리케이션
@@ -54,7 +54,7 @@
 │   ├── src/main/resources # 설정 파일 및 템플릿 (Mustache)
 │   └── build.gradle       # 빌드 설정
 └── README.md              # 프로젝트 문서
-\`\`\`
+```
 
 ## 🏁 시작하기 (Getting Started)
 
@@ -68,18 +68,18 @@
 ### 2. Python 데이터 서버 실행
 데이터 수집 및 전처리를 담당하는 Python 서버를 먼저 실행합니다.
 
-\`\`\`bash
+```bash
 # 필수 라이브러리 설치
 pip install fastapi uvicorn pandas pandas-datareader numpy
 
 # 서버 실행 (Port: 8000)
 python backserver.py
-\`\`\`
+```
 
 ### 3. Spring Boot 웹 서버 실행
 웹 인터페이스를 제공하는 Spring Boot 서버를 실행합니다.
 
-\`\`\`bash
+```bash
 cd survey
 
 # Windows
@@ -87,7 +87,7 @@ cd survey
 
 # Mac/Linux
 ./gradlew bootRun
-\`\`\`
+```
 
 ### 4. 접속
 브라우저를 열고 다음 주소로 접속합니다.
